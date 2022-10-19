@@ -50,3 +50,4 @@ const deleteMovieById = (req, res, next) => {
 module.exports = {
   getMovie, createMovie, deleteMovieById,
 };
+
