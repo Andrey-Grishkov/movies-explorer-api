@@ -32,7 +32,7 @@ const movie = new mongoose.Schema({
       message: 'Некорректная ссылка',
     },
   },
-  trailerLink: {
+  trailer: {
     type: String,
     required: true,
     validate: {
@@ -41,6 +41,14 @@ const movie = new mongoose.Schema({
       },
       message: 'Некорректная ссылка',
     },
+  },
+  nameRU: {
+    type: String,
+    required: true,
+  },
+  nameEN: {
+    type: String,
+    required: true,
   },
   thumbnail: {
     type: String,
@@ -52,23 +60,15 @@ const movie = new mongoose.Schema({
       message: 'Некорректная ссылка',
     },
   },
-  owner: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    ref: 'user',
-  },
   movieId: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: 'user',
   },
-  nameRU: {
-    type: String,
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
     required: true,
-  },
-  nameEN: {
-    type: String,
-    required: true,
+    ref: 'user',
   },
 });
 

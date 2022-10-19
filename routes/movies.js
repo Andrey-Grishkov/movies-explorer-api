@@ -20,7 +20,7 @@ routerMovies.post('/', celebrate({
     director: Joi.string().required(),
     duration: Joi.number().required(),
     year: Joi.string().required(),
-    description: Joi.number().required(),
+    description: Joi.string().required(),
     image: Joi.string().uri().required().custom((value, helper) => {
       if (validator.isURL(value)) {
         return value;
@@ -33,8 +33,8 @@ routerMovies.post('/', celebrate({
       }
       return helper.message('Невалидный URL');
     }),
-    nameRU: Joi.number().required(),
-    nameEN: Joi.number().required(),
+    nameRU: Joi.string().required(),
+    nameEN: Joi.string().required(),
     thumbnail: Joi.string().uri().required().custom((value, helper) => {
       if (validator.isURL(value)) {
         return value;

@@ -16,6 +16,7 @@ const login = (req, res, next) => {
         .cookie('jwt', token)
         .send({
           message: 'Успешная авторизация',
+          token
         });
     })
     .catch(next);
