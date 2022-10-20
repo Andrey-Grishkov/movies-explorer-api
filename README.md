@@ -4,8 +4,8 @@ Backend часть для проекта `Movies-explorer`.
 Movies-explorer - модель сервиса по поиску фильмов
 
 ## 🌐 Ссылки на сервер и домейны проекта:
-### 🗄️ IP сервера: 51.250.13.65
-### ⚙️ Backend часть: https://mesto.backend.grishkov.nomoredomains.icu
+### 🗄️ IP сервера: 62.84.126.8
+### ⚙️ Backend часть: https://api.movies.grishkov.nomoredomains.icu
 
 ### 🛠️ Технологии:
 
@@ -19,7 +19,7 @@ Movies-explorer - модель сервиса по поиску фильмов
 - Клонируйте репозиторий
 
 ```bash
-  git clone git@github.com:Andrey-Grishkov/react-mesto-api-full.git
+  git clone git@github.com:Andrey-Grishkov/movies-explorer-api.git
 ```
 
 - Перейдите в директорию проекта

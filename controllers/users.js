@@ -16,7 +16,7 @@ const login = (req, res, next) => {
         .cookie('jwt', token)
         .send({
           message: 'Успешная авторизация',
-          token
+          token,
         });
     })
     .catch(next);
@@ -35,16 +35,16 @@ const createUser = (req, res, next) => {
       email: user.email,
       name: user.name,
     })).catch((err) => {
-    if (err.name === 'ValidationError') {
-      next(new BadRequestError('Некорректные данные'));
-      return;
-    }
-    if (err.code === 11000) {
-      next(new ConflictError('Указанный email уже существует'));
-      return;
-    }
-    next(err);
-  })
+      if (err.name === 'ValidationError') {
+        next(new BadRequestError('Некорректные данные'));
+        return;
+      }
+      if (err.code === 11000) {
+        next(new ConflictError('Указанный email уже существует'));
+        return;
+      }
+      next(err);
+    })
     .catch(next);
 };
 

@@ -12,10 +12,35 @@ const getMovie = (req, res, next) => {
 };
 
 const createMovie = (req, res, next) => {
-  const { country, director, duration, year, description, image, trailer, nameRU, nameEN, thumbnail, movieId } = req.body;
+  const {
+    country,
+    director,
+    duration,
+    year,
+    description,
+    image,
+    trailer,
+    nameRU,
+    nameEN,
+    thumbnail,
+    movieId,
+  } = req.body;
   const userId = req.user._id;
 
-  Movie.create({ country, director, duration, year, description, image, trailer, nameRU, nameEN, thumbnail, movieId, owner: userId })
+  Movie.create({
+    country,
+    director,
+    duration,
+    year,
+    description,
+    image,
+    trailer,
+    nameRU,
+    nameEN,
+    thumbnail,
+    movieId,
+    owner: userId,
+  })
     .then((movie) => res.send(movie))
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -50,4 +75,3 @@ const deleteMovieById = (req, res, next) => {
 module.exports = {
   getMovie, createMovie, deleteMovieById,
 };
-
