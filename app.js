@@ -4,39 +4,41 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 const cookieParser = require('cookie-parser');
+const helmet = require('helmet');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const router = require('./routes/index');
-const userSign = require('./routes/userSign');
 const errorHandler = require('./middlewares/errorHandler');
+const { rateLimiter } = require('./utils/rateLimiter');
 // const cors = require('./middlewares/cors');
+const dataBaseUrl = 'mongodb://localhost:27017/moviesdb';
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3000, NODE_ENV, DATABASE_URL } = process.env;
 
 const app = express();
+
+mongoose.connect((NODE_ENV === 'production' ? DATABASE_URL : dataBaseUrl),
+  {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+}
+  );
+
+app.listen(PORT, () => {
+  console.log(`Сервер запущен. Порт ${PORT}`);
+});
 
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 // app.use(cors);
 
-mongoose.connect('mongodb://localhost:27017/moviedb', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+app.use(rateLimiter);
 
-app.listen(PORT, () => {
-  console.log(`Сервер запущен. Порт ${PORT}`);
-});
+app.use(helmet());
 
 app.use(requestLogger);
 
-app.use('/', userSign);
-
 app.use(router);
-
-app.get('/signout', (req, res) => {
-  res.clearCookie('jwt').send({ message: 'Выход' });
-});
 
 app.use(errorLogger);
 

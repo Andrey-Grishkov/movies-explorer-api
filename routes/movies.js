@@ -27,7 +27,7 @@ routerMovies.post('/', celebrate({
       }
       return helper.message('Невалидный URL');
     }),
-    trailer: Joi.string().uri().required().custom((value, helper) => {
+    trailerLink: Joi.string().uri().required().custom((value, helper) => {
       if (validator.isURL(value)) {
         return value;
       }
@@ -41,7 +41,7 @@ routerMovies.post('/', celebrate({
       }
       return helper.message('Невалидный URL');
     }),
-    movieId: Joi.string().hex().length(24).required(),
+    movieId: Joi.number().required(),
   }),
 }), createMovie);
 

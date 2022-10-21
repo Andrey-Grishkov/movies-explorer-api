@@ -65,6 +65,9 @@ const updateUserProfile = (req, res, next) => {
       if (err.name === 'ValidationError') {
         next(new BadRequestError('Ошибка 400: Переданы некорректные данные'));
         return;
+      } else if (err.code === 11000) {
+        next(new ConflictError('Указанный email уже существует'));
+        return;
       }
       next(err);
     });
