@@ -16,12 +16,13 @@ const { PORT = 3000, NODE_ENV, DATABASE_URL } = process.env;
 
 const app = express();
 
-mongoose.connect((NODE_ENV === 'production' ? DATABASE_URL : dataBaseUrl),
+mongoose.connect(
+  (NODE_ENV === 'production' ? DATABASE_URL : dataBaseUrl),
   {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-}
-  );
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  },
+);
 
 app.listen(PORT, () => {
   console.log(`Сервер запущен. Порт ${PORT}`);
