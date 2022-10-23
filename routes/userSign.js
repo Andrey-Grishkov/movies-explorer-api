@@ -1,27 +1,17 @@
 const router = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
 const { login, createUser } = require('../controllers/users');
+const { validationUserSignIn, validationUserSignUp} = require('../middlewares/validations');
 
 router.post(
   '/signin',
-  celebrate({
-    body: Joi.object().keys({
-      email: Joi.string().email().required(),
-      password: Joi.string().required(),
-    }),
-  }),
+  validationUserSignIn,
   login,
 );
 
 router.post(
   '/signup',
-  celebrate({
-    body: Joi.object().keys({
-      email: Joi.string().required().email(),
-      name: Joi.string().min(2).max(30).trim().required(),
-      password: Joi.string().required(),
-    }),
-  }),
+  validationUserSignUp,
   createUser,
 );
 
