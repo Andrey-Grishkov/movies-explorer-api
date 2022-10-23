@@ -1,7 +1,6 @@
 const router = require('express').Router();
-const { celebrate, Joi } = require('celebrate');
 const { login, createUser } = require('../controllers/users');
-const { validationUserSignIn, validationUserSignUp} = require('../middlewares/validations');
+const { validationUserSignIn, validationUserSignUp } = require('../middlewares/validations');
 
 router.post(
   '/signin',

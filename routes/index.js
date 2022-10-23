@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { messages } = require('../utils/messages')
+const { messages } = require('../utils/messages');
 const routerUsers = require('./users');
 const routerMovies = require('./movies');
 const auth = require('../middlewares/auth');

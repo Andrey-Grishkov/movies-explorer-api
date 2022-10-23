@@ -7,6 +7,6 @@ const {
 
 routerUsers.get('/me', getUserInfo);
 
-routerUsers.patch('/me', validationUserUpdate , updateUserProfile);
+routerUsers.patch('/me', validationUserUpdate, updateUserProfile);
 
 module.exports = routerUsers;

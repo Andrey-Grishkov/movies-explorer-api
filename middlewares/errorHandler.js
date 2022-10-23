@@ -1,5 +1,5 @@
 const InternalError = require('../errors/InternalError');
-const { messages } = require('../utils/messages')
+const { messages } = require('../utils/messages');
 
 module.exports = (err, req, res, next) => {
   if (err.status) {

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const { isURL } = require('validator');
-const { messages } = require('../utils/messages')
+const { messages } = require('../utils/messages');
 
 const movie = new mongoose.Schema({
   country: {
@@ -64,7 +64,6 @@ const movie = new mongoose.Schema({
   movieId: {
     type: Number,
     required: true,
-    ref: 'user',
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,

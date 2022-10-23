@@ -1,6 +1,6 @@
+const validator = require('validator');
 const { celebrate, Joi } = require('celebrate');
 const { messages } = require('../utils/messages');
-const validator = require('validator');
 
 module.exports.validationUserSignIn = celebrate({
   body: Joi.object().keys({
@@ -12,7 +12,8 @@ module.exports.validationUserSignIn = celebrate({
 module.exports.validationUserSignUp = celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
-    name: Joi.string().min(2).max(30).trim().required(),
+    name: Joi.string().min(2).max(30).trim()
+      .required(),
     password: Joi.string().required(),
   }),
 });
