@@ -51,8 +51,6 @@ module.exports.validationMovieAdd = celebrate({
       }
       return helper.message(messages.messageErrorUrl);
     }),
-    nameRU: Joi.string().required(),
-    nameEN: Joi.string().required(),
     thumbnail: Joi.string().uri().required().custom((value, helper) => {
       if (validator.isURL(value)) {
         return value;
@@ -60,5 +58,7 @@ module.exports.validationMovieAdd = celebrate({
       return helper.message(messages.messageErrorUrl);
     }),
     movieId: Joi.number().required(),
+    nameRU: Joi.string().required(),
+    nameEN: Joi.string().required(),
   }),
 });

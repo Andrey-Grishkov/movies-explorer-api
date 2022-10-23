@@ -21,10 +21,10 @@ const createMovie = (req, res, next) => {
     description,
     image,
     trailerLink,
-    nameRU,
-    nameEN,
     thumbnail,
     movieId,
+    nameRU,
+    nameEN,
   } = req.body;
   const userId = req.user._id;
 
@@ -36,11 +36,11 @@ const createMovie = (req, res, next) => {
     description,
     image,
     trailerLink,
+    thumbnail,
+    owner: userId,
+    movieId,
     nameRU,
     nameEN,
-    thumbnail,
-    movieId,
-    owner: userId,
   })
     .then((movie) => res.send(movie))
     .catch((err) => {

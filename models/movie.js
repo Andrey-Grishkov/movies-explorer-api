@@ -43,14 +43,6 @@ const movie = new mongoose.Schema({
       message: messages.messageErrorLink,
     },
   },
-  nameRU: {
-    type: String,
-    required: true,
-  },
-  nameEN: {
-    type: String,
-    required: true,
-  },
   thumbnail: {
     type: String,
     required: true,
@@ -61,14 +53,22 @@ const movie = new mongoose.Schema({
       message: messages.messageErrorLink,
     },
   },
-  movieId: {
-    type: Number,
-    required: true,
-  },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: 'user',
+  },
+  movieId: {
+    type: Number,
+    required: true,
+  },
+  nameRU: {
+    type: String,
+    required: true,
+  },
+  nameEN: {
+    type: String,
+    required: true,
   },
 });
 
