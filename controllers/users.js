@@ -1,6 +1,8 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const User = require('../models/user');
+const jwtSecretKey = require('../utils/constants')
+const { messages } = require('../utils/messages')
 const BadRequestError = require('../errors/BadRequestError');
 const ConflictError = require('../errors/ConflictError');
 const NotFoundError = require('../errors/NotFoundError');
@@ -11,11 +13,11 @@ const login = (req, res, next) => {
   const { email, password } = req.body;
   return User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
+      const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : jwtSecretKey, { expiresIn: '7d' });
       res
         .cookie('jwt', token)
         .send({
-          message: 'Успешная авторизация',
+          message: messages.messageAuthOk,
           token,
         });
     })
@@ -36,11 +38,11 @@ const createUser = (req, res, next) => {
       name: user.name,
     })).catch((err) => {
       if (err.name === 'ValidationError') {
-        next(new BadRequestError('Некорректные данные'));
+        next(new BadRequestError(messages.messageErrorData));
         return;
       }
       if (err.code === 11000) {
-        next(new ConflictError('Указанный email уже существует'));
+        next(new ConflictError(messages.messageErrorEmailExist));
         return;
       }
       next(err);
@@ -57,16 +59,16 @@ const updateUserProfile = (req, res, next) => {
   )
     .then((user) => {
       if (!user) {
-        throw new NotFoundError('Ошибка 404: Пользователь не найден');
+        throw new NotFoundError(messages.messageErrorUserNotFind);
       }
       return res.send(user);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        next(new BadRequestError('Ошибка 400: Переданы некорректные данные'));
+        next(new BadRequestError(messages.messageErrorData));
         return;
       } if (err.code === 11000) {
-        next(new ConflictError('Указанный email уже существует'));
+        next(new ConflictError(messages.messageErrorEmailExist));
         return;
       }
       next(err);
@@ -78,7 +80,7 @@ const getUserInfo = (req, res, next) => {
   User.findById(_id)
     .then((user) => {
       if (!user) {
-        throw new NotFoundError(`Пользователь с id: ${_id} не найден`);
+        throw new NotFoundError(messages.messageErrorUserNotFind);
       }
       res.send({ message: user });
     })

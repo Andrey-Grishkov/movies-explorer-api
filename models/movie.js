@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { isURL } = require('validator');
+const { messages } = require('../utils/messages')
 
 const movie = new mongoose.Schema({
   country: {
@@ -29,7 +30,7 @@ const movie = new mongoose.Schema({
       validator(value) {
         return isURL(value);
       },
-      message: 'Некорректная ссылка',
+      message: messages.messageErrorLink,
     },
   },
   trailerLink: {
@@ -39,7 +40,7 @@ const movie = new mongoose.Schema({
       validator(value) {
         return isURL(value);
       },
-      message: 'Некорректная ссылка',
+      message: messages.messageErrorLink,
     },
   },
   nameRU: {
@@ -57,7 +58,7 @@ const movie = new mongoose.Schema({
       validator(value) {
         return isURL(value);
       },
-      message: 'Некорректная ссылка',
+      message: messages.messageErrorLink,
     },
   },
   movieId: {

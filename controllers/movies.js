@@ -1,4 +1,5 @@
 const Movie = require('../models/movie');
+const { messages } = require('../utils/messages')
 const BadRequestError = require('../errors/BadRequestError');
 const NotFoundError = require('../errors/NotFoundError');
 const ForbiddenError = require('../errors/ForbiddenError');
@@ -44,7 +45,7 @@ const createMovie = (req, res, next) => {
     .then((movie) => res.send(movie))
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        next(new BadRequestError('Ошибка 400: Переданы некорректные данные'));
+        next(new BadRequestError(messages.messageErrorData));
         return;
       }
       next(err);
@@ -55,17 +56,17 @@ const deleteMovieById = (req, res, next) => {
   Movie.findById(req.params.movieId)
     .then((movie) => {
       if (!movie) {
-        return next(new NotFoundError('Ошибка 404: Фильм не найден'));
+        return next(new NotFoundError(messages.messageErrorMovieNotFind));
       }
       if (!movie.owner.equals(req.user._id)) {
-        return next(new ForbiddenError('Ошибка 403: Фильм создан другим пользователем'));
+        return next(new ForbiddenError(messages.messageErrorMovieCreateAnotherUser));
       }
       return movie.remove()
-        .then(() => res.send({ message: 'Фильм удален' }));
+        .then(() => res.send({ message: messages.messageRemoveMovie }));
     })
     .catch((err) => {
       if (err.name === 'CastError') {
-        next(new BadRequestError('Ошибка 400: Некорректный id фильма'));
+        next(new BadRequestError(messages.messageErrorMovieId));
         return;
       }
       next(err);

@@ -1,6 +1,7 @@
 const routerMovies = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
 const validator = require('validator');
+const { messages } = require('../utils/messages')
 
 const {
   getMovie, createMovie, deleteMovieById,
@@ -25,13 +26,13 @@ routerMovies.post('/', celebrate({
       if (validator.isURL(value)) {
         return value;
       }
-      return helper.message('Невалидный URL');
+      return helper.message(messages.messageErrorUrl);
     }),
     trailerLink: Joi.string().uri().required().custom((value, helper) => {
       if (validator.isURL(value)) {
         return value;
       }
-      return helper.message('Невалидный URL');
+      return helper.message(messages.messageErrorUrl);
     }),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
@@ -39,7 +40,7 @@ routerMovies.post('/', celebrate({
       if (validator.isURL(value)) {
         return value;
       }
-      return helper.message('Невалидный URL');
+      return helper.message(messages.messageErrorUrl);
     }),
     movieId: Joi.number().required(),
   }),
