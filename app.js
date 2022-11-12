@@ -9,7 +9,7 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const router = require('./routes/index');
 const errorHandler = require('./middlewares/errorHandler');
 const { rateLimiter } = require('./utils/rateLimiter');
-// const cors = require('./middlewares/cors');
+const cors = require('./middlewares/cors');
 const { dataBaseUrl } = require('./utils/constants');
 
 const { PORT = 3000, NODE_ENV, DATABASE_URL } = process.env;
@@ -31,7 +31,7 @@ app.listen(PORT, () => {
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(cors);
+app.use(cors);
 
 app.use(requestLogger);
 
