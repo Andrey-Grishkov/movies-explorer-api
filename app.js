@@ -12,7 +12,7 @@ const { rateLimiter } = require('./utils/rateLimiter');
 const cors = require('./middlewares/cors');
 const { dataBaseUrl } = require('./utils/constants');
 
-const { PORT = 3000, NODE_ENV, DATABASE_URL } = process.env;
+const { PORT = 3001, NODE_ENV, DATABASE_URL } = process.env;
 
 const app = express();
 

@@ -82,7 +82,7 @@ const getUserInfo = (req, res, next) => {
       if (!user) {
         throw new NotFoundError(messages.messageErrorUserNotFind);
       }
-      res.send({ message: user });
+      res.send(user);
     })
     .catch(next);
 };

@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { messages } = require('../utils/messages');
 
-router.get('/signout', (req, res) => {
+router.post('/signout', (req, res) => {
   res.clearCookie('jwt').send({ message: messages.messageSignOut });
 });
 
