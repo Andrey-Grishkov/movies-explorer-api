@@ -17,8 +17,11 @@ const login = (req, res, next) => {
       res
         .cookie('jwt', token)
         .send({
-          message: messages.messageAuthOk,
-          token,
+          _id: user._id,
+          email: user.email,
+          name: user.name,
+          // message: messages.messageAuthOk,
+          // token,
         });
     })
     .catch(next);
