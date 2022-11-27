@@ -6,8 +6,8 @@ const allowedCors = [
   'https://localhost:3000',
   'http://localhost:3001',
   'https://localhost:3001',
-  'http://mesto.front.grishkov.nomoredomains.icu',
-  'https://mesto.front.grishkov.nomoredomains.icu',
+  'http://movies.grishkov.nomoredomains.club',
+  'https://movies.grishkov.nomoredomains.club',
 ];
 
 const cors = (req, res, next) => {
