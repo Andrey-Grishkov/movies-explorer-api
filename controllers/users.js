@@ -15,7 +15,10 @@ const login = (req, res, next) => {
     .then((user) => {
       const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : jwtSecretKey, { expiresIn: '7d' });
       res
-        .cookie('jwt', token)
+        .cookie('jwt', token, {
+          httpOnly: true,
+          sameSite: 'none',
+        })
         .send({
           _id: user._id,
           email: user.email,
