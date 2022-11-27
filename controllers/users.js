@@ -18,6 +18,7 @@ const login = (req, res, next) => {
         .cookie('jwt', token, {
           httpOnly: true,
           sameSite: 'none',
+          secure:true,
         })
         .send({
           _id: user._id,
