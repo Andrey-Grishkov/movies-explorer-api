@@ -8,8 +8,8 @@ const userSign = require('./userSign');
 const userSignOut = require('./userSignOut');
 
 router.use('/', userSign);
-router.use('/', userSignOut);
 router.use(auth);
+router.use('/', userSignOut);
 router.use('/users', routerUsers);
 router.use('/movies', routerMovies);
 

@@ -39,11 +39,21 @@ const createUser = (req, res, next) => {
       password: hash,
       name: req.body.name,
     })))
-    .then((user) => res.send({
-      _id: user._id,
-      email: user.email,
-      name: user.name,
-    })).catch((err) => {
+    .then((user) => {
+        const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : jwtSecretKey, { expiresIn: '7d' });
+      res
+        .cookie('jwt', token, {
+          httpOnly: true,
+          sameSite: 'none',
+          secure:true,
+        })
+        .send({
+        _id: user._id,
+        email: user.email,
+        name: user.name,
+      })
+    }
+      ).catch((err) => {
       if (err.name === 'ValidationError') {
         next(new BadRequestError(messages.messageErrorData));
         return;
