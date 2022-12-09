@@ -16,6 +16,8 @@ const { PORT, NODE_ENV, DATABASE_URL } = process.env;
 
 const app = express();
 
+//DATABASE_URL = 'mongodb://localhost:27017/moviesdb' - было в энви
+
 mongoose.connect(
   (NODE_ENV === 'production' ? DATABASE_URL : dataBaseUrl),
   {
