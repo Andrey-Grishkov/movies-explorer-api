@@ -8,6 +8,8 @@ const allowedCors = [
   'https://localhost:3001',
   'http://movies.grishkov.nomoredomains.club',
   'https://movies.grishkov.nomoredomains.club',
+  'https://movies-explorer-frontend-2r4o5b6f9-andrey-grishkov.vercel.app/',
+  'http://movies-explorer-frontend-2r4o5b6f9-andrey-grishkov.vercel.app/'
 ];
 
 const cors = (req, res, next) => {
